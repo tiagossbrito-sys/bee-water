@@ -14,8 +14,8 @@ Textos prontos para a App Store e o Google Play. Limites de caracteres já respe
 | Classificação etária | Livre / 4+ (sem conteúdo sensível) |
 | Idioma | Português (Brasil) |
 | Preço | Grátis (compras no app na fase 2) |
-| Política de privacidade | https://tiagossbrito-sys.github.io/golee/privacidade.html |
-| Suporte | https://tiagossbrito-sys.github.io/golee/suporte.html |
+| Política de privacidade | https://tiagossbrito-sys.github.io/bee-water/privacidade.html |
+| Suporte | https://tiagossbrito-sys.github.io/bee-water/suporte.html |
 | Palavras-chave (iOS, 100) | água,beber água,hidratação,lembrete,copo,saúde,hábito,meta,bee,gole |
 
 ## Descrição completa (Play 4000 / iOS 4000)
