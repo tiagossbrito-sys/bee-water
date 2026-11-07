@@ -4,6 +4,8 @@ import type { Activity, Objective, Sex } from '../game/types'
 import { golesForGoal, suggestGoalMl } from '../game/rules'
 import { Avatar } from '../components/Avatar'
 import { GROUPS_ENABLED, SOON_LABEL } from '../config'
+import { BeeLogo, BeeMark } from '../components/BeeMark'
+import { BeeSays } from '../components/BeeSays'
 
 export function Onboarding() {
   const complete = useStore((s) => s.completeOnboarding)
@@ -28,8 +30,9 @@ export function Onboarding() {
 
   return (
     <div className="onb app">
-      <div className="logo">Bee Water</div>
-      <div className="muted">Oi, eu sou a Bee. Vou lembrar você de beber água. Um copo, um gole.</div>
+      <div className="logo"><BeeLogo size={34} /></div>
+      {step === 0 && <div className="hero"><BeeMark size={120} /></div>}
+      <BeeSays label="Bee">Oi, eu sou a Bee. Vou lembrar você de beber água. Um copo, um gole.</BeeSays>
       <div className="steps">{[0, 1, 2].map((i) => <i key={i} className={i <= step ? 'on' : ''} />)}</div>
 
       {step === 0 && (
@@ -90,7 +93,7 @@ export function Onboarding() {
         <>
           <h1 style={{ fontSize: 24, margin: '0 0 12px' }}>Com quem você joga?</h1>
           {!GROUPS_ENABLED && <p className="muted small">Grupos, convites e ranking entre amigos chegam na próxima versão.</p>}
-          <div className="avatar-wrap"><Avatar character="bee" fill={0.35} size={120} happy /></div>
+          <div className="avatar-wrap"><Avatar character="bee" fill={0.35} size={110} happy /></div>
           <button className={`option${choice === 'criar' ? ' on' : ''}${GROUPS_ENABLED ? '' : ' soon'}`} disabled={!GROUPS_ENABLED} onClick={() => setChoice('criar')}><b>Criar meu grupo {!GROUPS_ENABLED && <span className="chip warn">{SOON_LABEL}</span>}</b><span>Você recebe um código e um link para convidar amigos.</span></button>
           {choice === 'criar' && GROUPS_ENABLED && <div className="field"><input value={groupName} onChange={(e) => setGroupName(e.target.value)} placeholder={`Turma de ${name.split(' ')[0] || 'amigos'}`} /></div>}
           <button className={`option${choice === 'entrar' ? ' on' : ''}${GROUPS_ENABLED ? '' : ' soon'}`} disabled={!GROUPS_ENABLED} onClick={() => setChoice('entrar')}><b>Entrar com código {!GROUPS_ENABLED && <span className="chip warn">{SOON_LABEL}</span>}</b><span>Alguém te mandou um link ou um código de 6 letras.</span></button>

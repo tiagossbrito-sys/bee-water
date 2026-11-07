@@ -1,5 +1,6 @@
 import { Avatar } from '../components/Avatar'
 import { SOON_LABEL } from '../config'
+import { BeeSays } from '../components/BeeSays'
 
 const DEMO = [
   { name: 'Ana', character: 'baleia', pct: 1.0, l: '2,00 L' },
@@ -14,8 +15,7 @@ export function GrupoPreview() {
     <div className="screen">
       <div className="row between"><h1>Grupo</h1><span className="chip warn">{SOON_LABEL}</span></div>
       <div className="card">
-        <b>Jogar com amigos chega na próxima versão.</b>
-        <div className="muted small" style={{ marginTop: 4 }}>Você vai criar um grupo, convidar por link e disputar o Maior Gole do Dia, da Semana e Geral. Enquanto isso, seus goles já contam: tudo fica guardado para quando os grupos abrirem.</div>
+        <BeeSays label="Bee"><b>Jogar com amigos chega na próxima versão.</b> Você vai criar um grupo, convidar por link e disputar o Maior Gole do Dia, da Semana e Geral. Enquanto isso, seus goles já contam: tudo fica guardado para quando os grupos abrirem.</BeeSays>
       </div>
       <div className="soon-block" aria-hidden="true">
         <div className="row" style={{ marginBottom: 12 }}>

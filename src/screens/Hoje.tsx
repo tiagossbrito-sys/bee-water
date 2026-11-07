@@ -5,6 +5,7 @@ import { GoleButton } from '../components/GoleButton'
 import { botMlAt, dateKey, expectedGolesNow, golesForGoal, liters, nextReminder, rankingScore, UNDO_MS } from '../game/rules'
 import { morningMessage, reminderMessage, rhythmLine } from '../game/messages'
 import { tipFor } from '../game/tips'
+import { BeeSays } from '../components/BeeSays'
 import { GROUPS_ENABLED } from '../config'
 
 export function Hoje({ goGroup }: { goGroup: () => void }) {
@@ -84,7 +85,7 @@ export function Hoje({ goGroup }: { goGroup: () => void }) {
           <span className={`chip ${behind === 0 ? 'good' : behind === 1 ? 'warn' : ''}`}>{pct >= 1 ? 'Gole Cheio' : closed ? 'dia encerrado' : behind === 0 ? 'no ritmo' : `${behind} atrás`}</span>
         </div>
         <div className="small muted" style={{ marginTop: 8 }}>{rhythmLine(totalGoles, settings.awakeStart, settings.awakeEnd)}</div>
-        <div style={{ marginTop: 8 }}>{msg}</div>
+        <div style={{ marginTop: 10 }}><BeeSays label="Bee">{msg}</BeeSays></div>
         <div className="small muted" style={{ marginTop: 6 }}>
           {next ? `Próximo lembrete às ${next.getHours()}:${String(next.getMinutes()).padStart(2, '0')}` : 'Lembretes desligados'} · streak {streak} {streak === 1 ? 'dia' : 'dias'}
         </div>
@@ -101,9 +102,10 @@ export function Hoje({ goGroup }: { goGroup: () => void }) {
       )}
 
       <div className="card flat">
-        <div className="small" style={{ fontWeight: 800 }}>Sabia que?</div>
-        <div>{tip.texto}</div>
-        <div className="small muted" style={{ marginTop: 6 }}><a href={tip.fonte} target="_blank" rel="noreferrer">ver a fonte</a></div>
+        <BeeSays label="A Bee conta" tone="quiet">
+          <div>{tip.texto}</div>
+          <div className="small muted" style={{ marginTop: 6 }}><a href={tip.fonte} target="_blank" rel="noreferrer">ver a fonte</a></div>
+        </BeeSays>
       </div>
 
       {toast && <div className="toast">{toast}</div>}

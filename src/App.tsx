@@ -7,6 +7,7 @@ import { Colecao } from './screens/Colecao'
 import { Eu } from './screens/Eu'
 import { TabBar, type Tab } from './components/TabBar'
 import { Celebration } from './components/Celebration'
+import { TopBar } from './components/TopBar'
 import { useLocalReminders } from './pwa/reminders'
 import { useNativeApp } from './native/useNative'
 
@@ -45,6 +46,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <TopBar />
       {tab === 'hoje' && <Hoje goGroup={() => setTab('grupo')} />}
       {tab === 'grupo' && <Grupo />}
       {tab === 'colecao' && <Colecao />}

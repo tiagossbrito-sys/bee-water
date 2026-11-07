@@ -276,3 +276,31 @@ input[type='range']::-moz-range-thumb { width: 20px; height: 20px; border-radius
 .option.soon, .option:disabled { opacity: 0.55; cursor: default; }
 .option b .chip { margin-left: 6px; vertical-align: middle; }
 .soon-block { opacity: 0.45; pointer-events: none; filter: saturate(0.7); }
+
+/* ===== Marca Bee ===== */
+.topbar {
+  position: sticky; top: 0; z-index: 18; display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; padding-top: calc(10px + env(safe-area-inset-top));
+  background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.bee-logo { display: inline-flex; align-items: center; gap: 6px; }
+.bee-wordmark { font-weight: 900; font-size: 18px; letter-spacing: -0.3px; color: var(--water-deep); }
+.bee-wordmark b { color: var(--accent); font-weight: 900; }
+.screen h1 { margin-top: 4px; }
+
+.bee-says { display: flex; gap: 10px; align-items: flex-start; }
+.bee-says-mark { flex-shrink: 0; margin-top: 2px; }
+.bee-bubble {
+  position: relative; background: var(--surface-2); border-radius: 16px; border-top-left-radius: 4px; padding: 10px 12px; flex: 1; min-width: 0;
+}
+.bee-bubble::before { content: ''; position: absolute; left: -7px; top: 10px; border: 7px solid transparent; border-right-color: var(--surface-2); border-left: 0; }
+.bee-label { font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 2px; }
+.bee-says.quiet .bee-bubble { background: var(--surface); border: 1px solid var(--line); }
+.bee-says.quiet .bee-bubble::before { border-right-color: var(--line); }
+
+.onb .logo { display: flex; align-items: center; gap: 10px; }
+.onb .hero { display: flex; justify-content: center; margin: 4px 0 8px; }
+.celebrate .bee-float { position: absolute; right: 14px; top: 14px; animation: float 2.2s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-6px) rotate(-6deg); } }
+.bee-corner { position: fixed; right: -18px; bottom: calc(var(--tab-h) + 6px); opacity: 0.12; pointer-events: none; z-index: 0; }
