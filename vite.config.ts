@@ -3,12 +3,14 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 const rel = process.env.RELATIVE_BASE === '1'
+const store = process.env.VITE_STORE_BUILD === '1'
 
 export default defineConfig({
   base: rel ? './' : '/',
   plugins: [
     react(),
     VitePWA({
+      disable: store,
       registerType: 'autoUpdate',
       strategies: 'injectManifest',
       srcDir: 'src/pwa',

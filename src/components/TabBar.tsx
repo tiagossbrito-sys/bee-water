@@ -1,3 +1,5 @@
+import { SHOW_GROUPS } from '../config'
+
 export type Tab = 'hoje' | 'grupo' | 'colecao' | 'eu'
 
 const ICONS: Record<Tab, React.ReactElement> = {
@@ -12,7 +14,7 @@ export function TabBar({ tab, onChange }: { tab: Tab; onChange: (t: Tab) => void
   return (
     <nav className="tabbar" aria-label="Navegação principal">
       <div className="tabbar-inner">
-        {(Object.keys(LABELS) as Tab[]).map((t) => (
+        {(Object.keys(LABELS) as Tab[]).filter((t) => t !== 'grupo' || SHOW_GROUPS).map((t) => (
           <button key={t} className={`tab${tab === t ? ' on' : ''}`} onClick={() => onChange(t)} aria-current={tab === t ? 'page' : undefined}>
             {ICONS[t]}
             {LABELS[t]}

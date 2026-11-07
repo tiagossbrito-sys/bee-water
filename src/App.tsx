@@ -10,6 +10,7 @@ import { Celebration } from './components/Celebration'
 import { TopBar } from './components/TopBar'
 import { useLocalReminders } from './pwa/reminders'
 import { useNativeApp } from './native/useNative'
+import { SHOW_GROUPS } from './config'
 
 export default function App() {
   const stage = useStore((s) => s.stage)
@@ -48,7 +49,7 @@ export default function App() {
     <div className="app">
       <TopBar />
       {tab === 'hoje' && <Hoje goGroup={() => setTab('grupo')} />}
-      {tab === 'grupo' && <Grupo />}
+      {tab === 'grupo' && SHOW_GROUPS && <Grupo />}
       {tab === 'colecao' && <Colecao />}
       {tab === 'eu' && <Eu />}
       <TabBar tab={tab} onChange={setTab} />

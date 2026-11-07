@@ -5,6 +5,7 @@ import { golesForGoal, suggestGoalMl } from '../game/rules'
 import { requestPush, pushStatus } from '../pwa/reminders'
 import { isNative } from '../native/platform'
 import { nativePermission, requestNativePermission } from '../native/notifications'
+import { SHOW_GROUPS } from '../config'
 
 function Row({ label, sub, on, onToggle }: { label: string; sub?: string; on: boolean; onToggle: () => void }) {
   return (
@@ -63,15 +64,15 @@ export function Eu() {
         <Row label="Lembretes push" sub={perm === 'granted' ? 'Permissão concedida' : perm === 'denied' ? 'Bloqueado no navegador' : 'Toque para permitir'} on={settings.pushEnabled && perm === 'granted'} onToggle={async () => { if (!settings.pushEnabled || perm !== 'granted') { const p = isNative ? await requestNativePermission() : await requestPush(); setPerm(p); setSettings({ pushEnabled: p === 'granted' }) } else setSettings({ pushEnabled: false }) }} />
         <div className="field" style={{ marginTop: 10 }}><label>Intervalo</label><div className="seg">{([30, 45, 60, 90] as const).map((v) => <button key={v} className={settings.reminderMin === v ? 'on' : ''} onClick={() => setSettings({ reminderMin: v })}>{v} min</button>)}</div></div>
         <Row label="Pular se bebeu há pouco" sub="Sem lembrete se houve gole nos últimos 45 min" on={settings.skipIfRecent} onToggle={t('skipIfRecent')} />
-        <Row label="Avisos do grupo" sub="Ultrapassagem e Gole do Grupo, máximo 3 por dia" on={settings.groupAlerts} onToggle={t('groupAlerts')} />
-        <Row label="Cutucões de amigos" on={settings.pokes} onToggle={t('pokes')} />
+        {SHOW_GROUPS && <Row label="Avisos do grupo" sub="Ultrapassagem e Gole do Grupo, máximo 3 por dia" on={settings.groupAlerts} onToggle={t('groupAlerts')} />}
+        {SHOW_GROUPS && <Row label="Cutucões de amigos" on={settings.pokes} onToggle={t('pokes')} />}
         <Row label="Resumo da noite" on={settings.nightSummary} onToggle={t('nightSummary')} />
-        <div className="small muted" style={{ paddingTop: 8 }}>{isNative ? 'Os lembretes são agendados no sistema e chegam mesmo com o app fechado.' : 'WhatsApp e e-mail semanal chegam na fase 2. No iPhone, os lembretes só funcionam depois de adicionar o Bee Water à tela inicial (Compartilhar → Adicionar à Tela de Início).'}</div>
+        <div className="small muted" style={{ paddingTop: 8 }}>{isNative ? 'Os lembretes são agendados no aparelho e chegam mesmo com o app fechado.' : 'No iPhone, os lembretes só funcionam depois de adicionar o Bee Water à tela inicial (Compartilhar → Adicionar à Tela de Início).'}</div>
       </div>
 
       <h2>Privacidade e aparência</h2>
       <div className="card">
-        <Row label="Mostrar litros aos amigos" sub="Desligado mostra só o percentual" on={settings.showLiters} onToggle={t('showLiters')} />
+        {SHOW_GROUPS && <Row label="Mostrar litros aos amigos" sub="Desligado mostra só o percentual" on={settings.showLiters} onToggle={t('showLiters')} />}
         <Row label="Mostrar horário dos goles" on={settings.showTimes} onToggle={t('showTimes')} />
         <div className="field" style={{ marginTop: 10 }}><label>Tema</label><div className="seg">{(['auto', 'claro', 'escuro'] as const).map((v) => <button key={v} className={settings.theme === v ? 'on' : ''} onClick={() => setSettings({ theme: v })}>{v}</button>)}</div></div>
         <Row label="Reduzir animações" on={settings.reduceMotion} onToggle={t('reduceMotion')} />

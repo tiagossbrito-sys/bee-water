@@ -3,6 +3,7 @@ import { Avatar } from '../components/Avatar'
 import { CHARACTERS } from '../store/characters'
 import { liters } from '../game/rules'
 import { shareText } from '../native/useNative'
+import { SHOW_PREMIUM } from '../config'
 
 export function Colecao() {
   const character = useStore((s) => s.character)
@@ -36,7 +37,7 @@ export function Colecao() {
       </div>
       <h2>Personagens</h2>
       <div className="grid">
-        {CHARACTERS.map((c) => {
+        {CHARACTERS.filter((c) => SHOW_PREMIUM || !c.premium).map((c) => {
           const ok = unlocked.includes(c.id)
           return (
             <button key={c.id} className={`char${character === c.id ? ' on' : ''}${ok ? '' : ' locked'}`} onClick={() => ok && setCharacter(c.id)} aria-pressed={character === c.id}>

@@ -17,6 +17,7 @@ Textos prontos para a App Store e o Google Play. Limites de caracteres já respe
 | Política de privacidade | https://tiagossbrito-sys.github.io/bee-water/privacidade.html |
 | Suporte | https://tiagossbrito-sys.github.io/bee-water/suporte.html |
 | Palavras-chave (iOS, 100) | água,beber água,hidratação,lembrete,copo,saúde,hábito,meta,bee,gole |
+| Dispositivos (iOS) | Somente iPhone nesta versão (sem screenshots de iPad) |
 
 ## Descrição completa (Play 4000 / iOS 4000)
 
@@ -34,9 +35,6 @@ O QUE A BEE FAZ POR VOCÊ
 • Dicas "Sabia que?" sobre água e pele, energia, rins e bem-estar, sempre com link para a fonte.
 • Tema claro ou escuro, unidades em ml ou oz, exportação dos seus registros em CSV.
 
-EM BREVE: GRUPOS COM AMIGOS
-Crie um grupo, convide por link e dispute o Maior Gole do Dia, da Semana e Geral. O ranking é justo: conta o percentual da sua meta, não só litros.
-
 SEUS DADOS SÃO SEUS
 Tudo fica no seu aparelho. Sem conta, sem anúncios, sem rastreadores. Você apaga tudo com um toque.
 
@@ -44,7 +42,7 @@ Bee Water não substitui orientação médica. Pessoas com restrição de líqui
 
 ## Novidades desta versão (0.2.0)
 
-Primeira versão do Bee Water: lembretes nativos que chegam com o app fechado, meta por copo, Super Gole, Gole Cheio, coleção de personagens e dicas com fonte. Grupos com amigos chegam na próxima versão.
+Primeira versão do Bee Water: lembretes que chegam com o app fechado, meta por copo, Super Gole, Gole Cheio, coleção de personagens e dicas com fonte.
 
 ## Google Play · Segurança dos dados
 
@@ -67,6 +65,14 @@ Primeira versão do Bee Water: lembretes nativos que chegam com o app fechado, m
 | Account deletion | Disponível no app (exigência 5.1.1(v)). |
 | Encryption (ITSAppUsesNonExemptEncryption) | Não (apenas HTTPS padrão). |
 | Sign in with Apple | Não exigido: o app não tem login de terceiros. |
+
+## Notas para o revisor (App Store Connect → App Review Information)
+
+Bee Water é um app de hidratação com lembretes locais e um jogo de metas por copo. Não há login, conta, servidor ou coleta de dados: tudo fica no aparelho. Os lembretes usam notificações locais agendadas pelo próprio app (UNUserNotificationCenter), com a ação "Gole (1 copo)" que registra um copo sem abrir o app. Não há compras no app nesta versão. Para testar: abra o app, informe um nome, aceite a meta sugerida, toque em "Começar" e depois no botão "Gole". Ao atingir 1 litro aparece a celebração "Super Gole"; ao atingir a meta, "Gole Cheio". Em Eu → Notificações, ative os lembretes para ver a permissão do sistema.
+
+## Versão de loja vs. versão web
+
+A versão de loja é gerada com `VITE_STORE_BUILD=1` (já configurado nos workflows). Nela não aparecem recursos ainda não disponíveis: a aba Grupo (prévia "em breve"), os personagens de assinatura Bee+ e as opções ligadas a grupos. A Apple rejeita conteúdo provisório (diretriz 2.1), por isso a separação. A versão web mantém a prévia para o piloto.
 
 ## Contas e custos
 
@@ -98,4 +104,6 @@ Primeira versão do Bee Water: lembretes nativos que chegam com o app fechado, m
 - [ ] Ícone, splash e screenshots conferidos no aparelho
 - [ ] Política de privacidade publicada (link acima no ar)
 - [ ] Versão 0.2.0 / versionCode 1 em android/app/build.gradle e no Xcode
+- [ ] Formulário "Apps de saúde" preenchido no Play Console (categoria: bem-estar, sem dados sensíveis coletados)
+- [ ] Notas para o revisor coladas no App Store Connect
 - [ ] Teste em aparelho real: lembrete chega com o app fechado; botão "Gole" na notificação registra o copo

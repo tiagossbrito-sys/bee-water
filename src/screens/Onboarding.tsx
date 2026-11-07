@@ -3,7 +3,7 @@ import { useStore } from '../store/useStore'
 import type { Activity, Objective, Sex } from '../game/types'
 import { golesForGoal, suggestGoalMl } from '../game/rules'
 import { Avatar } from '../components/Avatar'
-import { GROUPS_ENABLED, SOON_LABEL } from '../config'
+import { GROUPS_ENABLED, SOON_LABEL, SHOW_GROUPS } from '../config'
 import { BeeLogo, BeeMark } from '../components/BeeMark'
 import { BeeSays } from '../components/BeeSays'
 
@@ -33,7 +33,7 @@ export function Onboarding() {
       <div className="logo"><BeeLogo size={34} /></div>
       {step === 0 && <div className="hero"><BeeMark size={120} /></div>}
       <BeeSays label="Bee">Oi, eu sou a Bee. Vou lembrar você de beber água. Um copo, um gole.</BeeSays>
-      <div className="steps">{[0, 1, 2].map((i) => <i key={i} className={i <= step ? 'on' : ''} />)}</div>
+      <div className="steps">{(SHOW_GROUPS ? [0, 1, 2] : [0, 1]).map((i) => <i key={i} className={i <= step ? 'on' : ''} />)}</div>
 
       {step === 0 && (
         <>
@@ -85,7 +85,7 @@ export function Onboarding() {
             <b>{goles} goles por dia.</b> {goles <= awakeEnd - awakeStart ? `Um copo por hora, das ${awakeStart}h às ${awakeEnd}h, e a meta fecha sozinha.` : `Um a cada ${Math.round(((awakeEnd - awakeStart) / goles) * 60)} minutos entre ${awakeStart}h e ${awakeEnd}h.`}
           </div>
           <div className="spacer" />
-          <div className="row"><button className="btn secondary" onClick={() => setStep(0)}>Voltar</button><button className="btn" onClick={() => setStep(2)}>Continuar</button></div>
+          <div className="row"><button className="btn secondary" onClick={() => setStep(0)}>Voltar</button>{SHOW_GROUPS ? <button className="btn" onClick={() => setStep(2)}>Continuar</button> : <button className="btn" onClick={() => complete({ name: name.trim(), sex, weightKg: weight, activity, objective }, { glassMl: glass, goalMl, awakeStart, awakeEnd }, 'depois')}>Começar</button>}</div>
         </>
       )}
 
