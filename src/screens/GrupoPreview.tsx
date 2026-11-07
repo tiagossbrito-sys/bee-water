@@ -3,7 +3,7 @@ import { SOON_LABEL } from '../config'
 
 const DEMO = [
   { name: 'Ana', character: 'baleia', pct: 1.0, l: '2,00 L' },
-  { name: 'Você', character: 'gota', pct: 0.75, l: '1,50 L' },
+  { name: 'Você', character: 'bee', pct: 0.75, l: '1,50 L' },
   { name: 'Rafa', character: 'cacto', pct: 0.6, l: '1,50 L' },
   { name: 'Ju', character: 'pinguim', pct: 0.5, l: '1,00 L' },
 ]

@@ -84,7 +84,7 @@ function GrupoReal() {
     return (
       <div className="screen">
         <h1>Grupo</h1>
-        <p className="muted">O Golee é melhor com amigos. Crie um grupo ou entre em um.</p>
+        <p className="muted">O Bee Water é melhor com amigos. Crie um grupo ou entre em um.</p>
         <div className="card">
           <div className="field"><label>Nome do grupo</label><input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Turma do trabalho" /></div>
           <button className="btn" onClick={() => createGroup(newName || 'Meu grupo', '💧')}>Criar grupo</button>
@@ -102,8 +102,8 @@ function GrupoReal() {
 
   const inviteUrl = `${location.origin}${location.pathname}?join=${group.code}`
   async function invite() {
-    const text = `Entra no meu grupo no Golee e vamos ver quem toma o Maior Gole do Dia. Código ${group!.code}: ${inviteUrl}`
-    if (navigator.share) { try { await navigator.share({ title: 'Golee', text, url: inviteUrl }) } catch { /* cancelado */ } }
+    const text = `Entra no meu grupo no Bee Water e vamos ver quem toma o Maior Gole do Dia. Código ${group!.code}: ${inviteUrl}`
+    if (navigator.share) { try { await navigator.share({ title: 'Bee Water', text, url: inviteUrl }) } catch { /* cancelado */ } }
     else { await navigator.clipboard?.writeText(text); show('Convite copiado') }
   }
 

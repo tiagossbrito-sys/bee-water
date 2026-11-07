@@ -14,7 +14,7 @@ registerRoute(new NavigationRoute(new NetworkFirst({ cacheName: 'pages' })))
 
 // Push do servidor (fase 1): o payload traz título e corpo.
 self.addEventListener('push', (e) => {
-  const data = (() => { try { return e.data?.json() } catch { return null } })() ?? { title: 'Hora do gole', body: 'Um copo agora e você segue no ritmo.' }
+  const data = (() => { try { return e.data?.json() } catch { return null } })() ?? { title: 'Bee: hora do gole', body: 'Um copo agora e você segue no ritmo.' }
   e.waitUntil(self.registration.showNotification(data.title, { body: data.body, icon: 'icon-192.png', badge: 'icon-192.png', tag: 'golee-reminder', actions: [{ action: 'gole', title: 'Gole' }] } as NotificationOptions))
 })
 

@@ -102,8 +102,8 @@ export const useStore = create<GoleeState>()(
       groups: [],
       activeGroupId: null,
       history: {},
-      character: 'gota',
-      unlocked: ['gota', 'bolha'],
+      character: 'bee',
+      unlocked: ['bee', 'gota', 'bolha'],
       dailyWins: 0,
       weeklyWins: 0,
       pokesSentToday: {},
@@ -269,10 +269,11 @@ export const useStore = create<GoleeState>()(
     }),
     {
       name: 'golee',
-      version: 2,
+      version: 3,
       migrate: (state, version) => {
         const st = state as GoleeState
         if (version < 2 && st?.settings?.theme === 'auto') st.settings = { ...st.settings, theme: 'claro' }
+        if (version < 3 && st?.unlocked && !st.unlocked.includes('bee')) st.unlocked = ['bee', ...st.unlocked]
         return st
       },
     },

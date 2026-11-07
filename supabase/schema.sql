@@ -1,4 +1,4 @@
--- Golee · fase 1 · esquema inicial para Supabase (Postgres + RLS)
+-- Bee Water · fase 1 · esquema inicial para Supabase (Postgres + RLS)
 -- O app hoje roda só local (localStorage). Este esquema é o alvo da camada de servidor.
 create table if not exists profiles (
   id uuid primary key references auth.users on delete cascade,

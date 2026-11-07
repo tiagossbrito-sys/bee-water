@@ -55,6 +55,19 @@ export function Avatar({ character, fill, size = 180, happy = false }: { charact
 interface Shape { body: React.ReactElement; face: { x: number; y: number }; extras?: React.ReactElement }
 
 const SHAPES: Record<string, Shape> = {
+  bee: {
+    body: <ellipse cx="50" cy="60" rx="30" ry="25" />,
+    face: { x: 50, y: 50 },
+    extras: (
+      <g>
+        <ellipse cx="34" cy="30" rx="13" ry="8" fill="var(--surface)" stroke="var(--water-deep)" strokeWidth="2" opacity="0.9" transform="rotate(-25 34 30)" />
+        <ellipse cx="66" cy="30" rx="13" ry="8" fill="var(--surface)" stroke="var(--water-deep)" strokeWidth="2" opacity="0.9" transform="rotate(25 66 30)" />
+        <path d="M42 36 l-6 -10 M58 36 l6 -10" stroke="var(--text)" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="36" cy="25" r="2.2" fill="var(--text)" /><circle cx="64" cy="25" r="2.2" fill="var(--text)" />
+        <path d="M26 68 Q 50 74 74 68 M33 78 Q 50 82 67 78" fill="none" stroke="var(--text)" strokeWidth="3.5" strokeLinecap="round" opacity="0.5" />
+      </g>
+    ),
+  },
   gota: { body: <path d="M50 6 C 60 26, 84 42, 84 62 A 34 34 0 0 1 16 62 C 16 42, 40 26, 50 6 Z" />, face: { x: 50, y: 60 } },
   bolha: { body: <circle cx="50" cy="54" r="38" />, face: { x: 50, y: 52 } },
   baleia: {

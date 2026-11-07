@@ -46,7 +46,7 @@ export function useLocalReminders() {
         const total = golesForGoal(s.settings.goalMl, s.settings.glassMl)
         const done = Math.floor(sumMl(today) / s.settings.glassMl)
         if (!(s.settings.skipIfRecent && recent) && done < total) {
-          notify('Hora do gole', reminderMessage(profile.name, done, total, 0))
+          notify('Bee: hora do gole', reminderMessage(profile.name, done, total, 0))
         }
         schedule()
       }, delay)

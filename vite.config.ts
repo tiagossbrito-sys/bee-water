@@ -15,9 +15,9 @@ export default defineConfig({
       filename: 'sw.ts',
       injectManifest: { globPatterns: ['**/*.{js,css,html,svg,png,woff2}'] },
       manifest: {
-        name: 'Golee: beba água com amigos',
-        short_name: 'Golee',
-        description: 'Cada copo é um gole. Quem toma o Maior Gole do Dia?',
+        name: 'Bee Water: beba água com amigos',
+        short_name: 'Bee Water',
+        description: 'A Bee lembra você de beber água. Cada copo é um gole; quem toma o Maior Gole do Dia?',
         lang: 'pt-BR',
         start_url: rel ? './' : '/',
         scope: rel ? './' : '/',

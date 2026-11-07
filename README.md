@@ -1,4 +1,4 @@
-# Golee: beba água com amigos
+# Bee Water: beba água com amigos
 
 PWA em React + Vite. Cada copo é um gole; o grupo disputa quem toma o Maior Gole do Dia.
 

@@ -3,7 +3,7 @@ export function reminderMessage(name: string, golesDone: number, golesTotal: num
   if (golesDone >= golesTotal) return `Gole Cheio, ${first}! Hoje já fechou. Um gole extra se o calor pedir.`
   if (behind >= 2) return `${first}, você está ${behind} goles atrás do ritmo. Dois goles na próxima hora e volta ao normal.`
   if (behind === 1) return `Você está um gole atrás do ritmo. Um copo agora e você segue no ritmo de 1 por hora.`
-  return `Hora do gole, ${first}. Um copo agora e você segue no ritmo de 1 por hora.`
+  return `Hora do gole, ${first}. A Bee lembra: um copo agora e você segue no ritmo de 1 por hora.`
 }
 
 export function morningMessage(name: string, golesTotal: number): string {

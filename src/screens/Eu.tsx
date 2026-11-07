@@ -63,7 +63,7 @@ export function Eu() {
         <Row label="Avisos do grupo" sub="Ultrapassagem e Gole do Grupo, máximo 3 por dia" on={settings.groupAlerts} onToggle={t('groupAlerts')} />
         <Row label="Cutucões de amigos" on={settings.pokes} onToggle={t('pokes')} />
         <Row label="Resumo da noite" on={settings.nightSummary} onToggle={t('nightSummary')} />
-        <div className="small muted" style={{ paddingTop: 8 }}>WhatsApp e e-mail semanal chegam na fase 2. No iPhone, os lembretes só funcionam depois de adicionar o Golee à tela inicial (Compartilhar → Adicionar à Tela de Início).</div>
+        <div className="small muted" style={{ paddingTop: 8 }}>WhatsApp e e-mail semanal chegam na fase 2. No iPhone, os lembretes só funcionam depois de adicionar o Bee Water à tela inicial (Compartilhar → Adicionar à Tela de Início).</div>
       </div>
 
       <h2>Privacidade e aparência</h2>
@@ -79,7 +79,7 @@ export function Eu() {
       <div className="card">
         <button className="btn secondary" onClick={exportCsv}>Exportar goles (CSV)</button>
         <button className="btn ghost" style={{ color: 'var(--bad)', marginTop: 8 }} onClick={() => { if (confirm('Apagar tudo deste aparelho? Não dá para desfazer.')) resetAll() }}>Apagar conta e dados</button>
-        <div className="small muted" style={{ marginTop: 8 }}>Golee 0.1 · dados guardados só neste aparelho até a fase 1 (servidor).</div>
+        <div className="small muted" style={{ marginTop: 8 }}>Bee Water 0.2 · dados guardados só neste aparelho até a fase 1 (servidor).</div>
       </div>
     </div>
   )
