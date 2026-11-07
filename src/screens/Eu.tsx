@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useStore } from '../store/useStore'
 import type { Objective, Settings } from '../game/types'
 import { golesForGoal, suggestGoalMl } from '../game/rules'
 import { requestPush, pushStatus } from '../pwa/reminders'
+import { isNative } from '../native/platform'
+import { nativePermission, requestNativePermission } from '../native/notifications'
 
 function Row({ label, sub, on, onToggle }: { label: string; sub?: string; on: boolean; onToggle: () => void }) {
   return (
@@ -20,7 +22,8 @@ export function Eu() {
   const setProfile = useStore((s) => s.setProfile)
   const resetAll = useStore((s) => s.resetAll)
   const goles = useStore((s) => s.goles)
-  const [perm, setPerm] = useState(pushStatus())
+  const [perm, setPerm] = useState<string>(isNative ? 'prompt' : pushStatus())
+  useEffect(() => { if (isNative) nativePermission().then(setPerm) }, [])
   const t = (k: keyof Settings) => () => setSettings({ [k]: !settings[k] } as Partial<Settings>)
 
   function exportCsv() {
@@ -57,13 +60,13 @@ export function Eu() {
 
       <h2>Notificações</h2>
       <div className="card">
-        <Row label="Lembretes push" sub={perm === 'granted' ? 'Permissão concedida' : perm === 'denied' ? 'Bloqueado no navegador' : 'Toque para permitir'} on={settings.pushEnabled && perm === 'granted'} onToggle={async () => { if (!settings.pushEnabled || perm !== 'granted') { const p = await requestPush(); setPerm(p); setSettings({ pushEnabled: p === 'granted' }) } else setSettings({ pushEnabled: false }) }} />
+        <Row label="Lembretes push" sub={perm === 'granted' ? 'Permissão concedida' : perm === 'denied' ? 'Bloqueado no navegador' : 'Toque para permitir'} on={settings.pushEnabled && perm === 'granted'} onToggle={async () => { if (!settings.pushEnabled || perm !== 'granted') { const p = isNative ? await requestNativePermission() : await requestPush(); setPerm(p); setSettings({ pushEnabled: p === 'granted' }) } else setSettings({ pushEnabled: false }) }} />
         <div className="field" style={{ marginTop: 10 }}><label>Intervalo</label><div className="seg">{([30, 45, 60, 90] as const).map((v) => <button key={v} className={settings.reminderMin === v ? 'on' : ''} onClick={() => setSettings({ reminderMin: v })}>{v} min</button>)}</div></div>
         <Row label="Pular se bebeu há pouco" sub="Sem lembrete se houve gole nos últimos 45 min" on={settings.skipIfRecent} onToggle={t('skipIfRecent')} />
         <Row label="Avisos do grupo" sub="Ultrapassagem e Gole do Grupo, máximo 3 por dia" on={settings.groupAlerts} onToggle={t('groupAlerts')} />
         <Row label="Cutucões de amigos" on={settings.pokes} onToggle={t('pokes')} />
         <Row label="Resumo da noite" on={settings.nightSummary} onToggle={t('nightSummary')} />
-        <div className="small muted" style={{ paddingTop: 8 }}>WhatsApp e e-mail semanal chegam na fase 2. No iPhone, os lembretes só funcionam depois de adicionar o Bee Water à tela inicial (Compartilhar → Adicionar à Tela de Início).</div>
+        <div className="small muted" style={{ paddingTop: 8 }}>{isNative ? 'Os lembretes são agendados no sistema e chegam mesmo com o app fechado.' : 'WhatsApp e e-mail semanal chegam na fase 2. No iPhone, os lembretes só funcionam depois de adicionar o Bee Water à tela inicial (Compartilhar → Adicionar à Tela de Início).'}</div>
       </div>
 
       <h2>Privacidade e aparência</h2>

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useStore } from '../store/useStore'
 import { golesOfDay, golesForGoal, nextReminder, sumMl } from '../game/rules'
 import { reminderMessage } from '../game/messages'
+import { isNative } from '../native/platform'
 
 export function pushStatus(): NotificationPermission | 'unsupported' {
   if (typeof Notification === 'undefined') return 'unsupported'
@@ -32,6 +33,7 @@ async function notify(title: string, body: string) {
  */
 export function useLocalReminders() {
   useEffect(() => {
+    if (isNative) return
     let timer: number | undefined
     function schedule() {
       const { settings, goles, profile } = useStore.getState()

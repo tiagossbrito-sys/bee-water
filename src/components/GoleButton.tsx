@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { tap } from '../native/useNative'
 
 export function GoleButton({ onGole, label = 'Gole', sub }: { onGole: () => void; label?: string; sub?: string }) {
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([])
@@ -16,7 +17,7 @@ export function GoleButton({ onGole, label = 'Gole', sub }: { onGole: () => void
       onClick={() => {
         setPop(false)
         requestAnimationFrame(() => setPop(true))
-        if ('vibrate' in navigator) navigator.vibrate?.(12)
+        void tap()
         onGole()
       }}
     >

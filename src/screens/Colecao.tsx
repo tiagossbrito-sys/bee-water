@@ -2,6 +2,7 @@ import { useStore, useStreak } from '../store/useStore'
 import { Avatar } from '../components/Avatar'
 import { CHARACTERS } from '../store/characters'
 import { liters } from '../game/rules'
+import { shareText } from '../native/useNative'
 
 export function Colecao() {
   const character = useStore((s) => s.character)
@@ -18,8 +19,7 @@ export function Colecao() {
 
   async function share() {
     const text = `Meu Bee Water: ${liters(totalMl)} bebidos, ${cheios} Goles Cheios, streak de ${streak} dias e ${dailyWins}x Maior Gole do Dia. Qual seu gole hoje?`
-    if (navigator.share) { try { await navigator.share({ title: 'Bee Water', text }) } catch { /* cancelado */ } }
-    else await navigator.clipboard?.writeText(text)
+    await shareText('Bee Water', text)
   }
 
   return (

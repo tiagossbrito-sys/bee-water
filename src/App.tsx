@@ -8,6 +8,7 @@ import { Eu } from './screens/Eu'
 import { TabBar, type Tab } from './components/TabBar'
 import { Celebration } from './components/Celebration'
 import { useLocalReminders } from './pwa/reminders'
+import { useNativeApp } from './native/useNative'
 
 export default function App() {
   const stage = useStore((s) => s.stage)
@@ -19,6 +20,7 @@ export default function App() {
   const joinByCode = useStore((s) => s.joinByCode)
   const [tab, setTab] = useState<Tab>('hoje')
   useLocalReminders()
+  useNativeApp()
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme === 'auto' ? '' : theme

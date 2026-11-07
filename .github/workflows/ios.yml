@@ -1,0 +1,23 @@
+# Compila o projeto iOS do Bee Water (sem assinatura) para garantir que está pronto para o Xcode.
+# O envio para a App Store é feito no Xcode ou com certificados em secrets (ver docs/loja/ficha.md).
+name: iOS (compilação de verificação)
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - run: npx cap sync ios
+      - name: Compilar para simulador
+        run: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build | tail -20

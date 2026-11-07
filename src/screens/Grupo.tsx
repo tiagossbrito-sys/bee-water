@@ -5,6 +5,7 @@ import { botMlAt, dateKey, hash, liters, rankingScore } from '../game/rules'
 import type { Member } from '../game/types'
 import { GROUPS_ENABLED } from '../config'
 import { GrupoPreview } from './GrupoPreview'
+import { shareText } from '../native/useNative'
 
 type Period = 'dia' | 'semana' | 'geral'
 
@@ -103,8 +104,7 @@ function GrupoReal() {
   const inviteUrl = `${location.origin}${location.pathname}?join=${group.code}`
   async function invite() {
     const text = `Entra no meu grupo no Bee Water e vamos ver quem toma o Maior Gole do Dia. Código ${group!.code}: ${inviteUrl}`
-    if (navigator.share) { try { await navigator.share({ title: 'Bee Water', text, url: inviteUrl }) } catch { /* cancelado */ } }
-    else { await navigator.clipboard?.writeText(text); show('Convite copiado') }
+    if (await shareText('Bee Water', text, inviteUrl) && !navigator.share) show('Convite copiado')
   }
 
   const isOwner = group.ownerId === userId
